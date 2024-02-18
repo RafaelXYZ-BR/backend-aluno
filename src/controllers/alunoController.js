@@ -27,3 +27,24 @@ aluno.create({
 //catch = registra o que queremos que aconteça quando a Promise falhar
 .catch(error => next(error));
 };
+exports.SelectAll = (req, res, next) => {
+    aluno.findAll()
+    .then(aluno => {
+        if(aluno) {
+            res.status(status.OK).send(aluno);
+        }
+    })
+    .catch(error => next(error));
+}
+
+exports.SelectDetail = (req, res, next) => {
+    const id = req.params.id;
+
+    aluno.findByPk(id)
+    .then(aluno => {
+        if(aluno) {
+            res.status(status.OK).send(aluno);
+        }
+    })
+    .catch(error => next(error));
+};
